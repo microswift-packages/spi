@@ -12,9 +12,16 @@ Disables SPI and restores alternate pin functions for the SPI pins MISO, MOSI, S
 
 `static func sendByte(_ byte: UInt8) -> UInt8 `
 
-Send (and receive) one byte. To send a buffer use something like...
+Send (and receive) one byte.
+
+
+
+To send a buffer use something like...
 
 ```
+import ATmega328P
+import spi
+
 let myBufferSize: Int = 20
 
 if let myBuffer = UnsafeMutableBufferPointer<UInt8>.allocate(capacity: myBufferSize) {
@@ -25,6 +32,8 @@ if let myBuffer = UnsafeMutableBufferPointer<UInt8>.allocate(capacity: myBufferS
     myBuffer[1] = 0
     myBuffer[2] = 128
     myBuffer[3] = 91
+
+    // ... etc until your buffer is full and ready to transmit
 
     for byte in myBuffer {
         ATmega328P.Spi.sendByte(byte)
