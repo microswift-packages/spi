@@ -44,6 +44,7 @@ public extension Spi {
     	}
     }
 
+    @discardableResult
     static func sendByte(_ byte: UInt8) -> UInt8 {
         spdr = byte
         while (spsr.registerValue & (1<<SPIF)) == 0 {}
