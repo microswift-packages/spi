@@ -25,12 +25,12 @@ import HAL
 //    static var spcr: Spcr  { get set }
 //}
 
-public extension Spi where Spcr.RegisterType == UInt8 {
+public extension Spi {
     static func stop() {
     	spcr.registerValue &= ~(1<<SPE)
     }
 
-    static func startMaster(speed: UInt8, mode: UInt8, lsb: Bool) {
+    static func startMaster(speed: UInt8, mode: UInt8, lsb: Bool) where Spcr.RegisterType == UInt8 {
         let masterSPCR: UInt8 = (1<<SPE)|(1<<MSTR)|((mode&3)<<CPHA)|((lsb ? 1 : 0)<<DORD)|(speed&3)
         spcr.registerValue = masterSPCR
     }
