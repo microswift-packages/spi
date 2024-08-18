@@ -1,0 +1,4 @@
+files:
+- spi.swift
+- Package.swift
+- module.modulemap
